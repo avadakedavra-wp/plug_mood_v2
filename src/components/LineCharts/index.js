@@ -10,7 +10,7 @@ for (let i = 1; i < 20000; i++) {
   data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]);
 }
 
-export default function LineCharts(){
+export default function LineCharts({name}){
     const option = {
         tooltip: {
           trigger: 'axis',
@@ -20,7 +20,7 @@ export default function LineCharts(){
         },
         title: {
           left: 'left',
-          text: 'Test Line Charts'
+          text: `Test Line Charts ${name}`
         },
         toolbox: {
           feature: {

@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "../../page/LoginPage";
 import RegisterPage from "../../page/RegisterPage";
 import HomePage from "../../page/HomePage";
-import { Grid } from "@mui/material";
+import StationDetail from "../../page/StationDetail";
 
 export default function NavPage({ handleLogin }) {
   return (
@@ -12,6 +12,7 @@ export default function NavPage({ handleLogin }) {
       <Route exact path="/" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/homepage" element={<HomePage />} />
+      <Route path="/homepage/station/detail" element={<StationDetail />} />
     </Routes>
   );
 }

@@ -3,16 +3,15 @@ import { Grid } from "@mui/material";
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
-  Button,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import userData from '../../data/data_mock_up.json'
 import UserStatusGrid from "../UserStatusGrid";
-export default function RequestSection() {
+import Box from "@mui/material/Box";
+
+export default function RequestSection({userData}) {
   const [filter, setFilter] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
@@ -29,20 +28,23 @@ export default function RequestSection() {
     // Perform search logic using filterValue and searchValue
   };
   return (
-    <Grid container spacing={0}>
-      <FormControl component="form" onSubmit={handleSearchSubmit}>
+    <>
+    <Grid container spacing={0} style={{height: "auto"}}>
+      <FormControl onSubmit={handleSearchSubmit}>
         <Grid
           container
           spacing={0}
-          style={{ margin: 10, marginBottom: 10, marginTo: 10 }}
+          style={{ margin: 10, marginBottom: 10, marginTop: 10, height: "auto" }}
         >
-          <Grid item xs={6} sm={6}>
-            <Typography variant="h5" sx={{ fontStyle: "bold" }}>
-              คำร้องขอลงทะเบียนผู้ใช้งาน
-            </Typography>
+          <Grid item xs={6} md={8} >
+            <div>
+              <Typography variant="h5" sx={{ fontStyle: "bold" }}>
+                คำร้องขอลงทะเบียนผู้ใช้งาน
+              </Typography>
+            </div>
           </Grid>
-          <Grid item xs={6} sm={6}>
-            <RadioGroup row value={filter} onChange={handleFilterChange}>
+          <Grid item xs={6} md={4} >
+            <RadioGroup row value={filter} onChange={handleFilterChange} style={{ textAlign: 'right'}}>
               <FormControlLabel
                 value="new"
                 control={<Radio />}
@@ -73,15 +75,17 @@ export default function RequestSection() {
             <TextField
               label="ค้นหา"
               value={searchValue}
+              size="small"
               onChange={handleSearchChange}
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 2}}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={12} style={{marginTop:25}}>
             <UserStatusGrid data={userData} />
           </Grid>
         </Grid>
       </FormControl>
     </Grid>
+    </>
   );
 }

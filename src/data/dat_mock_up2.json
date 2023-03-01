@@ -1,0 +1,32 @@
+{
+    "results":[
+        {
+            "id": 1,
+            "stationName": "ขับรถ ev ชนตู้",
+            "rating": 4.7,
+            "reviewCount": 100,
+            "updateDate": "12/12/2565"
+        },
+        {
+            "id": 2,
+            "stationName": "ปั๊มนี้ไฟรั่ว ",
+            "rating": 2.0,
+            "reviewCount": 5920,
+            "updateDate": "12/12/2565"
+        },
+        {
+            "id": 3,
+            "stationName": "ปั๊มไม่มีไฟฟ้า",
+            "rating": 3.5,
+            "reviewCount": 1020,
+            "updateDate": "12/12/2565"
+        },
+        {
+            "id": 4,
+            "stationName": "ขับรถ ev ชนตู้",
+            "rating": 5.0,
+            "reviewCount": 4090,
+            "updateDate": "12/12/2565"
+        }
+    ]
+}
