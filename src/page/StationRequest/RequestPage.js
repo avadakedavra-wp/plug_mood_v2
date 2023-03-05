@@ -32,7 +32,7 @@ export default function RequestPage({ state }) {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <div>
-                            <Typography variant="subtitle1" marginLeft={2}>
+                            <Typography variant="subtitle1" >
                                 สถานีชาร์จในบ้าน โดย ชื่อเจ้าของบ้าน
                             </Typography>
                         </div>
@@ -41,7 +41,7 @@ export default function RequestPage({ state }) {
                         <div>
                             <Typography variant="h5">หัวปลั๊ก</Typography>
                         </div>
-                        <Grid container spacing={2} marginLeft={2}>
+                        <Grid container spacing={2} >
                             <Grid item xs={2} sm={2}>
                                 <img
                                     style={{ width: 55, heigh: "auto" }}
@@ -67,7 +67,7 @@ export default function RequestPage({ state }) {
                                 </div>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={2} marginLeft={2}>
+                        <Grid container spacing={2} >
                             <Grid item xs={2} sm={2}>
                                 <img
                                     style={{ width: 55, heigh: "auto" }}
@@ -93,7 +93,7 @@ export default function RequestPage({ state }) {
                                 </div>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={2} marginLeft={2}>
+                        <Grid container spacing={2} >
                             <Grid item xs={2} sm={2}>
                                 <img
                                     style={{ width: 55, heigh: "auto" }}
@@ -119,11 +119,11 @@ export default function RequestPage({ state }) {
                                 </div>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={12}>
+                        <Grid item xs={12} sm={12} marginTop={2}>
                             <div>
                                 <Typography variant="h5">เลือกประเภทของสถานที่ตั้ง</Typography>
                             </div>
-                            <Grid container spacing={0} marginLeft={2}>
+                            <Grid container spacing={0} >
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">หมูบ้าน</Typography>
@@ -131,25 +131,25 @@ export default function RequestPage({ state }) {
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <div>
-                                        <Typography variant="bodsubtitle1y2">
+                                        <Typography variant="subtitle1">
                                             เบอร์โทร์ติดต่อสถานที่ : 081-234-2344
                                         </Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <div>
-                                        <Typography variant="bodsubtitle1y2">
+                                        <Typography variant="subtitle1">
                                             เวลาเปิดทำการ 09:00 - 16:00
                                         </Typography>
                                     </div>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={12}>
+                        <Grid item xs={12} sm={12} marginTop={2}>
                             <div>
                                 <Typography variant="h5">สิ่งอำหน่วยความสะดวก</Typography>
                             </div>
-                            <Grid container spacing={0} marginLeft={2}>
+                            <Grid container spacing={0} >
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">ห้องน้ำ</Typography>
@@ -157,28 +157,28 @@ export default function RequestPage({ state }) {
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <div>
-                                        <Typography variant="bodsubtitle1y2">
+                                        <Typography variant="subtitle1">
                                             เครื่องปรับอากาศ
                                         </Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <div>
-                                        <Typography variant="bodsubtitle1y2">Wi-Fi</Typography>
+                                        <Typography variant="subtitle1">Wi-Fi</Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
                                     <div>
-                                        <Typography variant="bodsubtitle1y2">Cafe</Typography>
+                                        <Typography variant="subtitle1">Cafe</Typography>
                                     </div>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={12}>
+                        <Grid item xs={12} sm={12} marginTop={2}>
                             <div>
                                 <Typography variant="h5">สถานที่</Typography>
                             </div>
-                            <Grid container spacing={0} marginLeft={2}>
+                            <Grid container spacing={0} >
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">
@@ -188,16 +188,11 @@ export default function RequestPage({ state }) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={12}>
+                        <Grid item xs={12} sm={12} marginTop={2}>
                             <div>
-                                <Typography variant="h5">สถานที่</Typography>
+                                <Typography variant="h5">ช่องทางชำระเงิน</Typography>
                             </div>
-                            <Grid container spacing={0} marginLeft={2}>
-                                <Grid item xs={12} sm={12}>
-                                    <div>
-                                        <Typography variant="subtitle1">ช่องทางชำระเงิน</Typography>
-                                    </div>
-                                </Grid>
+                            <Grid container spacing={0} >
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">

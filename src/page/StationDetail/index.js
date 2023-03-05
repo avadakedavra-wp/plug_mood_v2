@@ -65,9 +65,16 @@ export default function StationDetail() {
               value={value}
               onChange={handleChange}
               aria-label="simple tabs example"
+              variant="fullWidth"
+              sx={{
+                width:'500px',
+                '& .MuiTabs-indicator': {
+                  backgroundColor: '#603494', // color of the selected tab indicator
+                },
+              }}
             >
-              <Tab label="รายละเอียดปั๊ม" {...a11yProps(0)} />
-              <Tab label="รีวิว" {...a11yProps(1)} />
+              <Tab label="รายละเอียดปั๊ม" {...a11yProps(0)} sx={{ fontSize: '20px', color: '#000', '&.Mui-selected': { color: '#603494' } }} />
+              <Tab label="รีวิว" {...a11yProps(1)} sx={{ fontSize: '20px', color: '#000', '&.Mui-selected': { color: '#603494' } }} />
             </Tabs>
           </Box>
         </Grid>
@@ -76,7 +83,7 @@ export default function StationDetail() {
         <Divider variant="middle" />
       </Grid>
       <Grid item xs={12} sm={12}>
-        <Grid container  justifyContent="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={12}>
             <TabPanel value={value} index={0}>
               <StationProfile state={state} />
@@ -89,26 +96,24 @@ export default function StationDetail() {
               </Grid>
             </TabPanel>
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <Grid container spacing={0} style={{ minHeight: "100vh" }}>
-              <Grid item xs={6} sm={6}>
-                <Button
-                  variant="contained"
-                  style={{ float: "left" }}
-                  onClick={() => navigate(-1)}
-                >
-                  Back
-                </Button>
-              </Grid>
-              <Grid item xs={6} sm={6}>
-                <Button
-                  variant="contained"
-                  color="error"
-                  style={{ float: "right" }}
-                >
-                  Suspension
-                </Button>
-              </Grid>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={6} sm={6}>
+              <Button
+                variant="contained"
+                style={{ float: "left" }}
+                onClick={() => navigate(-1)}
+              >
+                Back
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <Button
+                variant="contained"
+                color="error"
+                style={{ float: "right" }}
+              >
+                Suspension
+              </Button>
             </Grid>
           </Grid>
         </Grid>

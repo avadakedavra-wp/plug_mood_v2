@@ -59,9 +59,15 @@ export default function HomePage() {
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
+            sx={{
+              width:'500px',
+              '& .MuiTabs-indicator': {
+                backgroundColor: '#603494', // color of the selected tab indicator
+              },
+            }}
           >
-            <Tab label="หน้าคำร้อง" {...a11yProps(0)} />
-            <Tab label="รายการปั้ม" {...a11yProps(1)} />
+            <Tab label="หน้าคำร้อง" {...a11yProps(0)} sx={{ fontSize: '20px',  color: '#000', '&.Mui-selected': { color: '#603494' } }} />
+            <Tab label="รายการปั้ม" {...a11yProps(1)} sx={{ fontSize: '20px',  color: '#000', '&.Mui-selected': { color: '#603494' } }} />
           </Tabs>
         </Box>
       </Grid>
