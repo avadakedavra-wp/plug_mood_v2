@@ -1,9 +1,9 @@
-import React, { useContext, useSate } from "react";
+import React, { useContext, useState } from "react";
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Paper from "@mui/material/Paper";
+// import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 
@@ -45,7 +45,7 @@ function a11yProps(index) {
 }
 
 export default function HomePage() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const { isAuthenticated, dataSession } = useContext(AuthContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);

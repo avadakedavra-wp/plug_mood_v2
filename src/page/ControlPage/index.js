@@ -33,10 +33,10 @@ const ControlPage = () => {
             <NavBar />
           </Grid>
         )}
-        <Box 
-        style ={{
+        <Box
+          style={{
             marginTop: isAuthenticated ? '80px' : '0px'
-        }}
+          }}
         >
           <NavPage handleLogin={handleLogin} />
         </Box>

@@ -4,7 +4,7 @@
             "id": 1,
             "userName": "Pond infinity",
             "stationName": "สถานี SE",
-            "status": "รอการตรวจสอบ",
+            "status": "ตรวจสอบแล้ว",
             "date": "12/12/2565",
             "avatar": ""
         },
@@ -12,7 +12,7 @@
             "id": 2,
             "userName": "เอิร์ธ",
             "stationName": "Ev ชาร์จ",
-            "status": "รอการตรวจสอบ",
+            "status": "ตรวจสอบแล้ว",
             "date": "12/12/2565",
             "avatar": ""
         },

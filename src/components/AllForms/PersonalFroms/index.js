@@ -5,24 +5,39 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
+import axios from 'axios';
 
 
 export default function PersonalForm(formData){
 
 
     const [formPersonalData, setFormPersonalData] = useState({});
-
+    const [submit, setSubmit] = useState(0)
     const handleChange = (event) => {
         setFormPersonalData({
         ...formData,
         [event.target.name]: event.target.value
       });
     };
-  
+    console.log(formPersonalData)
     const handleSubmit = (event) => {
       event.preventDefault();
+      setSubmit(1)
     };
+
+    if(submit === 1){
+      axios.post('http://localhost:5000/plug_mood/register', {
+        "username":"test",
+        "lastname":"test",
+        "email":"test",
+        "telephone":"test",
+        "password":"test"
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => console.error(error));
+    }
 
     return (
         <Box
