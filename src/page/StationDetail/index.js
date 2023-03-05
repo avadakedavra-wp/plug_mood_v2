@@ -76,13 +76,13 @@ export default function StationDetail() {
         <Divider variant="middle" />
       </Grid>
       <Grid item xs={12} sm={12}>
-        <Grid container justify="center" alignItems="center">
+        <Grid container  justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={12}>
             <TabPanel value={value} index={0}>
               <StationProfile state={state} />
             </TabPanel>
           </Grid>
-          <Grid container justify="center" alignItems="center">
+          <Grid container justifyContent="center" alignItems="center">
             <TabPanel value={value} index={1}>
               <Grid item xs={12} sm={12}>
                 <StationScore state={state} />

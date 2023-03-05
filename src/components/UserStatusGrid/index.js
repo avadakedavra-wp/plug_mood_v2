@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Grid, Paper, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
 
 export default function UserStatusGrid({ data }) {
     const userData = data.data_user;
-    const [scrollPosition, setScrollPosition] = useState(0);
-
+    const navigate = useNavigate();
     return (
         <>
             <Box
@@ -16,8 +18,11 @@ export default function UserStatusGrid({ data }) {
             >
                 {userData.map((user, index) => (
                     <Box key={index}>
-                        <Paper variant="outlined" style={{ background: "#D7C0FD", width: "96%", marginTop: 5 }}>
-                            <Grid container spacing={0} style={{ background: "#D7C0FD" }}>
+                        <Card style={{ background: "#D7C0FD", width: "96%", marginTop: 8, marginLeft: 10 }} onClick={() => {
+                            navigate('/user/request', { state  : { userName: user.username ,}})
+                        }}>
+                            <CardActionArea>
+                            <Grid container spacing={0} style={{ background: "#D7C0FD" , margin: 5}}>
                                 <Grid item xs={6} sm={6}>
                                     <div>
                                         <Typography variant="h6">{user.username}</Typography>
@@ -30,6 +35,7 @@ export default function UserStatusGrid({ data }) {
                                             style={{
                                                 color: user.status === "ยังไม่อ่าน" ? "red" : "#000",
                                                 textAlign: "right",
+                                                marginRight: 20
                                             }}
                                         >
                                             {user.status}
@@ -40,7 +46,8 @@ export default function UserStatusGrid({ data }) {
                                     <Typography variant="body1">{user.datetime}</Typography>
                                 </Grid>
                             </Grid>
-                        </Paper>
+                            </CardActionArea>
+                        </Card>
                     </Box>
                 ))}
             </Box>

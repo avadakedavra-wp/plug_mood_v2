@@ -60,8 +60,8 @@ export default function HomePage() {
             onChange={handleChange}
             aria-label="simple tabs example"
           >
-            <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
+            <Tab label="หน้าคำร้อง" {...a11yProps(0)} />
+            <Tab label="รายการปั้ม" {...a11yProps(1)} />
           </Tabs>
         </Box>
       </Grid>

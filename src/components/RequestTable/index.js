@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
 import userHistory from '../../data/data_mock_up1.json'
-
+import { useNavigate } from "react-router-dom";
 
 const columns = [
     {
@@ -54,16 +54,15 @@ const columns = [
       flex: 1
     }
   ];
-  
-  const rows = [
-    { id: 1, userName: 'Snow', stationName: 'stationName1', status: 'รอการตรวจสอบ' , date: 35 , avatar:'',},
-    { id: 2, userName: 'Snow', stationName: 'stationName1', status: 'ตรวจสอบแล้ว' , date: 35 , avatar:''},
-    { id: 3, userName: 'Snow', stationName: 'stationName1', status: 'รอการตรวจสอบ', date: 35 , avatar:''},
-    { id: 4, userName: 'Snow', stationName: 'stationName1', status: 'ตรวจสอบแล้ว', date: 35 , avatar:''},
-
-  ];
 
 export default function RequestTable(){
+
+  const navigate = useNavigate()
+
+    const handleRowClick = (params) => {
+        console.log(params.row.stationName)
+        navigate('/request', { state  : { userName: params.row.stationName,id: params.row.id }})
+    };
     return(
         <Box sx={{ height: 250, width: '100%' }}>
             <DataGrid
@@ -72,6 +71,7 @@ export default function RequestTable(){
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 disableSelectionOnClick
+                onRowClick={handleRowClick}
                 experimentalFeatures={{ newEditingApi: true }}
             />
          </Box>
