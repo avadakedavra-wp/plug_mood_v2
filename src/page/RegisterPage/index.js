@@ -8,16 +8,20 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "../../model/axios";
 
 //components
 import PersonalForm from "../../components/AllForms/PersonalFroms";
 
+const ENDPOINT = '/plug_mood/check-email'
 const theme = createTheme();
 
-export default function RegisterPage() {
+export default function RegisterPage({handleLogin}) {
   const [next, setNext] = useState();
-  const [formData, setFormData] = React.useState({});
-
+  const [formData, setFormData] = useState({});
+  const [validatePwd, setValidatePwd] = useState(false);
+  const [validateEmail, setValidateEmail] = useState(false);
+  const [errmsg, setErrMsg] = useState('')
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -25,10 +29,29 @@ export default function RegisterPage() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData)
-    setNext('show')
+    const data = new FormData(event.currentTarget);
+    const pwd = data.get('pass')
+    const conPwd = data.get('conPass')
+    const email = data.get('email')
+    const response = await axios.post(ENDPOINT,{"email" : email})
+    console.log(event.preventDefault())
+    console.log(response.data.status)
+    if(pwd === conPwd){
+      console.log(response.data.status)
+      if(response?.status === 200 && response?.data.status === true){
+        setValidateEmail(true)
+        setErrMsg('Your Email it already registered.')
+      }else if(response.data.status === false){
+        setNext('show')
+        setValidateEmail(false)
+        setValidatePwd(false)
+      }
+    }else{
+      setValidatePwd(true)
+      setErrMsg('Password and re-password is not match. Pleae try again')
+    }
   };
 
   return (
@@ -38,6 +61,7 @@ export default function RegisterPage() {
         {next === "show" ? (
           <PersonalForm
             formData={formData}
+            handleLogin={handleLogin}
           />
         ) : (
             <Box
@@ -57,6 +81,8 @@ export default function RegisterPage() {
                   <TextField
                     required
                     fullWidth
+                    error={validateEmail}
+                    helperText={validateEmail && (errmsg)}
                     id="email"
                     label="Email Address"
                     name="email"
@@ -68,6 +94,8 @@ export default function RegisterPage() {
                   <TextField
                     required
                     fullWidth
+                    error={validatePwd}
+                    helperText={validatePwd && (errmsg)}
                     id="pass"
                     label="Password"
                     type="password"
@@ -80,6 +108,8 @@ export default function RegisterPage() {
                   <TextField
                     required
                     fullWidth
+                    error={validatePwd}
+                    helperText={validatePwd && (errmsg)}
                     name="conPass"
                     label="Confirm Password"
                     type="password"
@@ -96,7 +126,6 @@ export default function RegisterPage() {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    to="/register/information"
                   >
                     Back
                   </Button>

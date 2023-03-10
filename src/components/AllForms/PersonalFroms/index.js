@@ -1,43 +1,62 @@
-import * as React from "react";
+import React, { useEffect, useContext } from "react";
+import PropTypes from "prop-types";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import axios from 'axios';
+import axios from "../../../model/axios";
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../../page/ControlPage";
+const ENDPOINT = "/plug_mood/register"
 
+export default function PersonalForm({formData, handleLogin}){
 
-export default function PersonalForm(formData){
-
-
+    const navigate = useNavigate()
     const [formPersonalData, setFormPersonalData] = useState({});
-    const [submit, setSubmit] = useState(0)
+    const { isAuthenticated } = useContext(AuthContext)
+    // const [submit, setSubmit] = useState(0)
+    // const [errMsg ,setErrMsg] = useState('')
+    // const [validate ,setValidate] = useState(false)
+
     const handleChange = (event) => {
         setFormPersonalData({
-        ...formData,
+        ...formPersonalData,
         [event.target.name]: event.target.value
       });
     };
-    console.log(formPersonalData)
-    const handleSubmit = (event) => {
+
+    console.log(handleLogin);
+
+    const handleSubmit = async (event) => {
       event.preventDefault();
-      setSubmit(1)
+      try {
+        const response = await axios.post(ENDPOINT, {
+          "username":formPersonalData.Fname,
+          "lastname":formPersonalData.lName,
+          "email":formData.email,
+          "telephone":formPersonalData.tel,
+          "password":formData.pass
+        })
+        console.log(response)
+        if(response?.status === 200 && response?.data.results.length !== 0){
+          handleLogin({
+            email: formData.email,
+            password: formData.pass,
+          })
+        }
+    }catch (error){
+        console.log(error)
+    }
     };
 
-    if(submit === 1){
-      axios.post('http://localhost:5000/plug_mood/register', {
-        "username":"test",
-        "lastname":"test",
-        "email":"test",
-        "telephone":"test",
-        "password":"test"
-      })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => console.error(error));
-    }
+    useEffect(() => {
+      if (isAuthenticated) {
+          navigate('/homepage');
+      }
+
+  }, [isAuthenticated, navigate]);
 
     return (
         <Box
@@ -59,7 +78,7 @@ export default function PersonalForm(formData){
                     fullWidth
                     id="Fname"
                     label="Frist Name"
-                    name="Fnamw"
+                    name="Fname"
                     autoComplete="Fname"
                     onChange={handleChange}
                   />

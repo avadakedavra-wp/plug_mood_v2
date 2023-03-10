@@ -12,7 +12,7 @@ export default function NavPage({ handleLogin }) {
   return (
     <Routes>
       <Route exact path="/" element={<LoginPage handleLogin={handleLogin} />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/register" element={<RegisterPage handleLogin={handleLogin} />} />
       <Route path="/request" element={<StationRequest />} /> 
       <Route path="/user/request" element={<UserRequest />} /> 
       <Route path="/homepage" element={<HomePage />} />

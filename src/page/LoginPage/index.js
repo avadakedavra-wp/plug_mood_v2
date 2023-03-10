@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../ControlPage';
 // import useStyles from './style';
 import { inputLabelClasses } from "@mui/material/InputLabel";
-
+import axios from '../../model/axios';
+const ENDPOINT = '/plug_mood/login';
 
 function Copyright(props) {
     return (
@@ -29,15 +30,40 @@ function Copyright(props) {
 
 export default function LoginPage({ handleLogin }) {
     const navigate = useNavigate()
+    const [errMsg, setErrMsg] = useState('')
+    const [validate, setValidate] = useState(false)
     const { isAuthenticated } = useContext(AuthContext)
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        handleLogin({
-            email: data.get('email'),
-            password: data.get('password'),
-        })
+        const email = data.get('email'); 
+        const pwd = data.get('password')
+        console.log(email)
+        console.log(pwd)
+        try {
+            const response = await axios.post(ENDPOINT, {"email": email, "password": pwd})
+            // console.log(response)
+            if(response?.status === 200 && response?.data.data.length !== 0){
+                handleLogin({
+                    email: data.get('email'),
+                    password: data.get('password'),
+                })
+            }else{
+                setErrMsg('Your Email and Password is incorrect. Please try again')
+                setValidate(true)
+            }
+        }catch (error){
+            console.log(error)
+            if(!error?.response){
+                setErrMsg('No server Respone')
+            }else if(error.response?.status === 400){
+                setErrMsg('Missing Username or Password')
+            }else {
+                setErrMsg('Login Failed')
+            }
+        }
     }
+
     useEffect(() => {
         if (isAuthenticated) {
             navigate('/homepage');
@@ -107,10 +133,13 @@ export default function LoginPage({ handleLogin }) {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
+                            type="email"
                             autoComplete="email"
                             autoFocus
+                            error={validate}
+                            helperText= {validate && (errMsg)}
                             InputLabelProps={{
                                 sx: {
                                     color: "white",
@@ -150,6 +179,8 @@ export default function LoginPage({ handleLogin }) {
                             label="Password"
                             type="password"
                             id="password"
+                            error={validate}
+                            helperText= {validate && (errMsg)}
                             autoComplete="current-password"
                             InputLabelProps={{
                                 sx: {
