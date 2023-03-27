@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Box, Typography } from "@mui/material";
@@ -10,12 +10,13 @@ import RequestTable from "../../components/RequestTable";
 import TextField from "@mui/material/TextField";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import axios from "../../model/axios";
 
-
-export default function RequestPage() {
+export default function RequestPage({staionsDetail}) {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [activeChart, setActiveChart] = useState(0);
+  const [sales, setSales] = useState([]);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -29,6 +30,19 @@ export default function RequestPage() {
   const handlePageChange = (event, value) => {
     setActiveChart(value - 1);
   };
+
+  useEffect(() => {
+    async function getSales() {
+      try {
+        const response = await axios.get('plug_mood/get-sales');
+        setSales(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getSales();
+  }, []);
+
 
   return (
     <>
@@ -44,9 +58,9 @@ export default function RequestPage() {
               <Paper elevation={0} sx={{ width: '100%', borderColor: "text.primary", border: '2px solid #000' }}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={12}>
-                    {activeChart === 0 && (<LineCharts name={'month'} />)}
-                    {activeChart === 1 && (<LineCharts name={'Daily'} />)}
-                    {activeChart === 2 && (<LineCharts name={'year'} />)}
+                    {activeChart === 0 && (<LineCharts name={'เดือน'}  datafiller={'ยอดขายทั้งหมด'}/>)}
+                    {activeChart === 1 && (<LineCharts name={'วัน'}  datafiller={'รายได้รายเดือน'} />)}
+                    {activeChart === 2 && (<LineCharts name={'ปี'}  datafiller={'กำไรรายเดือน'} />)}
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} sx={{
                     display: "flex",
@@ -94,7 +108,7 @@ export default function RequestPage() {
                 </form>
               </Grid>
               <Grid item xs={12} sm={12}>
-                <RequestTable />
+                <RequestTable searchTerm={searchTerm} />
               </Grid>
             </Grid>
           </Paper>

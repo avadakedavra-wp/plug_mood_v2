@@ -7,6 +7,7 @@ import HomePage from "../../page/HomePage";
 import StationDetail from "../../page/StationDetail";
 import StationRequest from "../../page/StationRequest";
 import UserRequest from "../../page/UserRequest";
+import TestMaps from "../../page/TestMaps";
 
 export default function NavPage({ handleLogin }) {
   return (
@@ -17,6 +18,7 @@ export default function NavPage({ handleLogin }) {
       <Route path="/user/request" element={<UserRequest />} /> 
       <Route path="/homepage" element={<HomePage />} />
       <Route path="/homepage/station/detail" element={<StationDetail />} /> 
+      <Route path="/test_map" element={<TestMaps />} /> 
     </Routes>
   );
 }

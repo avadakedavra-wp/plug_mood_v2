@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Tabs, Box, Tab } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,7 @@ import StationProfile from "../../components/StationProfile";
 import StationScore from "../../components/StationScore";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-
+import axios from "../../model/axios";
 import { useLocation } from "react-router-dom";
 
 function TabPanel(props) {
@@ -47,12 +47,32 @@ function a11yProps(index) {
 export default function StationDetail() {
   const [value, setValue] = useState(0);
   const { state } = useLocation();
+  const [dataDetail, setDataDetail] = useState([]);
+  const [dataReview, setdataReview] = useState([]);
+
   const navigate = useNavigate();
   console.log(state);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const responseReview = await axios.get(`/plug_mood/list-reviews?id=${state.id}`);
+        const responseDetail = await axios.get(`/plug_mood/get-detail-station?id=${state.id}`);
+        setdataReview(responseReview.data);
+        setDataDetail(responseDetail.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getData();
+  },[state.id])
+
+  console.log(dataDetail)
+  console.log(dataReview)
 
   return (
     <Grid container spacing={2} flexDirection="column">
@@ -86,13 +106,13 @@ export default function StationDetail() {
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={12}>
             <TabPanel value={value} index={0}>
-              <StationProfile state={state} />
+              <StationProfile state={state} dataDetail={dataDetail} />
             </TabPanel>
           </Grid>
           <Grid container justifyContent="center" alignItems="center">
             <TabPanel value={value} index={1}>
               <Grid item xs={12} sm={12}>
-                <StationScore state={state} />
+                <StationScore state={state} dataReview={dataReview} rating={state.rating} />
               </Grid>
             </TabPanel>
           </Grid>

@@ -1,9 +1,17 @@
-import React from "react";
+import React , {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
-export default function StationProfile({ state }) {
+export default function StationProfile({ state, dataDetail }) {
+    const [data, setData] = useState([])
+    useEffect(() => {
+        if(dataDetail && dataDetail.results && dataDetail.results.length > 0){
+            setData(dataDetail.results[0])
+        }else{
+            setData([])
+        }
+    },[dataDetail, setData])
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center" marginBottom={5}>
             <Grid item xs={6} sm={6}>
@@ -12,14 +20,14 @@ export default function StationProfile({ state }) {
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={12} marginTop={1}>
                                 <div>
-                                    <Typography variant="h5">{state.userName}</Typography>
+                                    <Typography variant="h5">{data.station_name}</Typography>
                                 </div>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <div>
-                            <Typography variant="h5">เจ้าของ: {state.userName}</Typography>
+                            <Typography variant="h5">เจ้าของ: {data.username} {data.lastname}</Typography>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={12}>
@@ -174,7 +182,7 @@ export default function StationProfile({ state }) {
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">
-                                            113/100 loshaitaijrak distrcts 20000 USA
+                                            {data.station_address}
                                         </Typography>
                                     </div>
                                 </Grid>
@@ -188,7 +196,7 @@ export default function StationProfile({ state }) {
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">
-                                            ธนาคาร xxxxx หมายเลขบัญชี xxxxxxxxxxx
+                                            {data.payments}
                                         </Typography>
                                     </div>
                                 </Grid>

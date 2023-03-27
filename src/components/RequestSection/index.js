@@ -11,22 +11,25 @@ import Typography from "@mui/material/Typography";
 import UserStatusGrid from "../UserStatusGrid";
 import Box from "@mui/material/Box";
 
-export default function RequestSection({userData}) {
+export default function RequestSection({userData, requestData}) {
   const [filter, setFilter] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
+
   };
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
+
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     // Perform search logic using filterValue and searchValue
   };
+  console.log(filter)
   return (
     <>
     <Grid container spacing={0} style={{height: "auto"}}>
@@ -58,13 +61,13 @@ export default function RequestSection({userData}) {
                 labelPlacement="end"
               />
               <FormControlLabel
-                value="option2"
+                value="old"
                 control={<Radio />}
                 label="เรียงตามวันที่เก่าสุด"
                 labelPlacement="end"
               />
               <FormControlLabel
-                value="option3"
+                value="read"
                 control={<Radio />}
                 label="ยังไม่อ่าน"
                 labelPlacement="end"
@@ -81,7 +84,7 @@ export default function RequestSection({userData}) {
             />
           </Grid>
           <Grid item xs={12} sm={12} style={{marginTop:25}}>
-            <UserStatusGrid data={userData} />
+            <UserStatusGrid filter={filter} searchValue={searchValue} />
           </Grid>
         </Grid>
       </FormControl>

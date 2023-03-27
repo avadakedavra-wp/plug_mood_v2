@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 
-export default function RequestPage({ state }) {
+export default function RequestPage({ staionsDetail }) {
     const navigate = useNavigate();
+    const [data, setData] = useState([])
+    useEffect(() => {
+        if(staionsDetail && staionsDetail.results && staionsDetail.results.length > 0){
+            setData(staionsDetail.results[0])
+        }else{
+            setData([])
+        }
+    },[staionsDetail])
+    
+    console.log(data);
     return (
         <Grid container spacing={2} justifyContent="center" alignItems="center" marginBottom={5}>
             <Grid item xs={6} sm={6}>
@@ -20,14 +30,14 @@ export default function RequestPage({ state }) {
                             </Grid>
                             <Grid item xs={11} sm={11} marginTop={1}>
                                 <div>
-                                    <Typography variant="h5">{state.userName}</Typography>
+                                    <Typography variant="h5">{data.station_name}</Typography>
                                 </div>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <div>
-                            <Typography variant="h5">เจ้าของ: {state.userName}</Typography>
+                            <Typography variant="h5">เจ้าของ: {data.username} {data.lastname}</Typography>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={12}>
@@ -182,7 +192,7 @@ export default function RequestPage({ state }) {
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">
-                                            113/100 loshaitaijrak distrcts 20000 USA
+                                            {data.station_address}
                                         </Typography>
                                     </div>
                                 </Grid>
@@ -196,7 +206,7 @@ export default function RequestPage({ state }) {
                                 <Grid item xs={12} sm={12}>
                                     <div>
                                         <Typography variant="subtitle1">
-                                            ธนาคาร xxxxx หมายเลขบัญชี xxxxxxxxxxx
+                                            {data.payments}
                                         </Typography>
                                     </div>
                                 </Grid>

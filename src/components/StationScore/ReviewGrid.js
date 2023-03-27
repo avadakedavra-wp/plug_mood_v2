@@ -5,8 +5,10 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import StarRating from "./StartRating";
+import Rating from '@mui/material/Rating';
 
-export default function ReviewGrid({userData}){
+export default function ReviewGrid({userData, dataReview}){
+    console.log("data", dataReview)
     return(
         <Box
                 mb={2}
@@ -14,7 +16,11 @@ export default function ReviewGrid({userData}){
                 flexDirection="column"
                 style={{ width: '99%', height: "424px", overflowY: "scroll" }}
             >
-                {userData.map((user, index) => (
+                {dataReview.results?.map((data, index) => {
+                    const date = new Date(data.review_date);
+                    const formattedDate = new Intl.DateTimeFormat('th-TH', { dateStyle: 'long' }).format(date);
+                    console.log(data.rating)
+                    return(
                     <Box key={index}>
                         <Paper variant="outlined" style={{ marginLeft: 3,background: "#FFFFFF", width: "98%", marginTop: 5 }}>
                             <Grid container spacing={0}  style={{ background: "#FFFFFF" , margin:20, }}>
@@ -25,22 +31,22 @@ export default function ReviewGrid({userData}){
                                     <Grid container spacing={0}>
                                         <Grid item xs={12} sm={12} >
                                             <Typography>
-                                                {user.userName}
+                                                {data.user_review}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} sm={12}>
                                             <Typography>
-                                                <StarRating rating={user.rating} showText={''} />
+                                                <Rating value={data.rating} readOnly/>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} sm={12}>
                                             <Typography>
-                                                {user.descripton}
+                                                {data.descripton}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} sm={12}>
                                             <Typography>
-                                                {user.date}
+                                                {formattedDate}
                                             </Typography>
                                         </Grid>
                                     </Grid>
@@ -48,7 +54,7 @@ export default function ReviewGrid({userData}){
                             </Grid>
                         </Paper>
                     </Box>
-                ))}
+                )})}
             </Box>
     );
 }

@@ -9,9 +9,9 @@ export default function StationsPage() {
     const [searchValue, setSearchValue] = useState('');
 
     const handleSearchChange = (event) => {
-        event.preventDefault();
-        // onSearch(searchTerm);
+        setSearchValue(event.target.value);
       }
+    console.log(searchValue)
     return (
         <>
             <Grid container spacing={2}>
@@ -39,7 +39,7 @@ export default function StationsPage() {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} style={{width:'100%'}}>
-                                <StationTable />
+                                <StationTable searchValue={searchValue}/>
                             </Grid>
                         </Grid>
                     </Paper>
