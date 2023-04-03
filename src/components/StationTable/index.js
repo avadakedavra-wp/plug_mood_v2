@@ -79,7 +79,7 @@ export default function StationTable({searchValue}){
 
     const handleRowClick = (params) => {
         console.log(params.row.all_rating)
-        navigate('/homepage/station/detail', { state  : { id: params.row.id, rating: params.row.all_rating }})
+        navigate('/homepage/station/detail', { state  : { id: params.row.id, rating: params.row.all_rating, statioName: params.row.station_name }})
     };
 
     return(

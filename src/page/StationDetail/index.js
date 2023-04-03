@@ -10,7 +10,11 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "../../model/axios";
 import { useLocation } from "react-router-dom";
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -49,6 +53,22 @@ export default function StationDetail() {
   const { state } = useLocation();
   const [dataDetail, setDataDetail] = useState([]);
   const [dataReview, setdataReview] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCloseDelete = async() => {
+    const responseDetail = await axios.put(`/plug_mood/delete-station?id=${state.id}`);
+    if(responseDetail.status===200){
+      navigate(-1);
+    }
+  };
 
   const navigate = useNavigate();
   console.log(state);
@@ -70,10 +90,6 @@ export default function StationDetail() {
     }
     getData();
   },[state.id])
-
-  console.log(dataDetail)
-  console.log(dataReview)
-
   return (
     <Grid container spacing={2} flexDirection="column">
       <Grid item xs={3} sm={12}>
@@ -131,9 +147,32 @@ export default function StationDetail() {
                 variant="contained"
                 color="error"
                 style={{ float: "right" }}
-              >
+                onClick={handleClickOpen}>
                 Suspension
               </Button>
+              <div>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  คุณกำลังจะแบนสถานี {state.statioName}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    คุณแน่ใจแล้วหรือที่จะแบนการใช้งานของสถานีนี้.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Disagree</Button>
+                  <Button onClick={handleCloseDelete} autoFocus>
+                    Agree
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
             </Grid>
           </Grid>
         </Grid>

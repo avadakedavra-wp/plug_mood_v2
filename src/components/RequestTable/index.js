@@ -67,8 +67,12 @@ export default function RequestTable({searchTerm}){
   const [staions, setStations] = useState([]);
 
     const handleRowClick = (params) => {
-        console.log(params.row.id)
-        navigate('/request', { state  : { id: params.row.id }})
+        console.log(params.row.status)
+        if(params.row.status === 1){
+
+        }else{
+          navigate('/request', { state  : { id: params.row.id }})
+        }
     };
 
     useEffect(() => {

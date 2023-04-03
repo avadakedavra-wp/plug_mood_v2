@@ -196,7 +196,11 @@ export default function UserRequest() {
                                 }
                                 <Grid container sx={{ justifyContent: "space-between", alignItems: "center", margin: 5, marginLeft: 40 }}>
                                     <Grid item xs={4} sm={4}>
-                                        <Button variant="contained" color="error" onClick={() => console.log("Button 1 clicked")}>
+                                        <Button variant="contained" color="error" onClick={() => {
+                                            axios.put(`http://localhost:5000/plug_mood/read-request?id=${state.request_id}&type=0`).then(() =>{
+                                                navigate(-1)
+                                            }).catch((err) => console.log(err))
+                                        }}>
                                             ไม่ผ่านการตจรวจสอบ
                                         </Button>
                                     </Grid>
@@ -206,7 +210,11 @@ export default function UserRequest() {
                                         </Button>
                                     </Grid>
                                     <Grid item xs={4} sm={4}>
-                                        <Button variant="contained" color="success" onClick={() => console.log("Button 3 clicked")} sx={{ marginLeft: 2 }}>
+                                        <Button variant="contained" color="success" onClick={() => {
+                                            axios.put(`http://localhost:5000/plug_mood/read-request?id=${state.request_id}&type=1`).then(() =>{
+                                                navigate(-1)
+                                            }).catch((err) => console.log(err))
+                                        }} sx={{ marginLeft: 2 }}>
                                             ผ่านการตรวจสอบ
                                         </Button>
                                     </Grid>

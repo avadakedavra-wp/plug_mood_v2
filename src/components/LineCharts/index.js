@@ -70,10 +70,6 @@ export default function LineCharts({ name, datafiller }) {
       return [];
     }
   }, [monthlyIncome]);
-
-
-  console.log("income", income);
-
   
   const sortedProfits = useMemo(() => {
     if (typeof monthlySales !== 'undefined' && monthlySales !== null) {
@@ -82,7 +78,7 @@ export default function LineCharts({ name, datafiller }) {
         const date = new Date(year, month - 1, 1);
         const profit = value - 5000; // Assuming a fixed cost of 5000 per month
         return [date, parseInt(profit)];
-      }).sort((a, b) => b[0] - a[0]);
+      }).sort((a, b) => b[0] - a[0]); ///  [date: [], price: []]
     } else {
       return [];
     }
@@ -95,9 +91,6 @@ export default function LineCharts({ name, datafiller }) {
       return [];
     }
   }, [saleData])
-
- 
-  
 
   const option = {
     tooltip: {
